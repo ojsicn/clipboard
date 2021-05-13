@@ -10,9 +10,10 @@
             <tr v-for="(value, index) in data" :key="index">
                 <td>{{value.writer}}</td>
                 <td>{{value.title}}</td>
-                <td>{{value.component}}</td>
+                <td>{{value.content}}</td>
             </tr>            
         </table>
+        <button @click="write">글쓰기</button>
     </div>
 </template>
 
@@ -21,6 +22,18 @@
 import data from '@/data' // 왜 @/data/index.js가 아니라 @/data인지?..
 
 export default {
-    data: data
+    name: 'Read',
+    data() {
+        return {
+            data: data
+        }
+    },
+    methods: {
+        write() {
+            this.$router.push({
+                path: 'create'
+            })
+        }
+    }
 }
 </script>
