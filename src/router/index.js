@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Read from '@/components/Read.vue'
+import Create from '@/components/Create.vue'
+
 
 Vue.use(VueRouter)
 
@@ -10,6 +12,11 @@ const routes = [
     name: 'Read',
     component: Read
   },
+  {
+    path: '/create',
+    name: 'Create',
+    component: Create
+  }
 ]
 
 const router = new VueRouter({
