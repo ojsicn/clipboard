@@ -7,7 +7,7 @@
                 <td>내용</td>
             </tr>
             <!-- data : 어레이 객체들, value : 어레이 객체 -->
-            <tr v-for="(value, index) in data" :key="index">
+            <tr v-for="(value, index) in data" :key="index" @click="detail(index)">
                 <td>{{value.writer}}</td>
                 <td>{{value.title}}</td>
                 <td>{{value.content}}</td>
@@ -32,6 +32,14 @@ export default {
         write() {
             this.$router.push({
                 path: 'create'
+            })
+        },
+        detail(index) {
+            this.$router.push({
+                name: 'Detail', // 왜 path 대신 name으로 주는지?
+                params: {
+                    contentId: index
+                }
             })
         }
     }
