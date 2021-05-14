@@ -14,7 +14,7 @@ const routes = [
     component: Read
   },
   {
-    path: '/create/:contentId?', // path params를 넣은 후부터는 param값이 전달되지 않으면 빈 컴포넌트가 뜬다. 이럴경우 query params를 넣는다.
+    path: '/create/:contentId?',
     name: 'Create',
     component: Create
   },

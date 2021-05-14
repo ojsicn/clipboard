@@ -1,47 +1,68 @@
 <template>
     <div>
-        <table>
-            <tr>
-                <td>글쓴이</td>
-                <td>제목</td>
-                <td>내용</td>
-            </tr>
-            <!-- data : 어레이 객체들, value : 어레이 객체 -->
-            <tr v-for="(value, index) in data" :key="index" @click="detail(index)">
-                <td>{{value.writer}}</td>
-                <td>{{value.title}}</td>
-                <td>{{value.content}}</td>
-            </tr>            
+        <app-bar/>
+        <div class="">
+            <br><br><br><br>
+            <table class="table">
+            <thead class="col">
+                <tr class="col">
+                    <th scope="row-2">번호</th>
+                    <th scope="row-2">글쓴이</th>
+                    <th scope="row-2">제목</th>
+                    <th scope="row-6">내용</th>
+                </tr>
+            </thead>
+            <tbody class="col">
+                <tr v-for="(value, index) of boardList" :key="index" @click="detail(index)">
+                    <th scope="row-2">{{index+1}}</th>
+                    <td class="row-2">{{value.writer}}</td>
+                    <td class="row-2">{{value.title}}</td>
+                    <td class="row-6">{{value.content}}</td>
+                </tr>
+            </tbody>
         </table>
-        <button @click="write">글쓰기</button>
+        <button class="btn btn-primary ml-2" type="submit" @click="write">글쓰기</button>
+        </div>
+        
     </div>
 </template>
 
 
 <script>
-import data from '@/data' // 왜 @/data/index.js가 아니라 @/data인지?..
 
-export default {
-    name: 'Read',
-    data() {
-        return {
-            data: data
-        }
-    },
-    methods: {
-        write() {
-            this.$router.push({
-                path: 'create'
-            })
+    import AppBar from '@/components/AppBar.vue'
+
+    export default {
+        name: 'Read',
+        components: {
+            AppBar,
         },
-        detail(index) {
-            this.$router.push({
-                name: 'Detail', // 왜 path 대신 name으로 주는지?
-                params: {
-                    contentId: index
-                }
-            })
-        }
+        data() {
+            return {
+                boardList: []
+            }
+        },
+        mounted() {
+            this.loadBoardList()
+        },
+        methods: {
+            loadBoardList () {
+                this.boardList = JSON.parse(localStorage.getItem('board-list')) || []
+            },
+            write() {
+                this.$router.push({
+                    path: 'create'
+                })
+            },
+            detail(index) {
+                this.$router.push({
+                    name: 'Detail',
+                    params: {
+                        contentId: index
+                    }
+                })
+            }
+        },
+        
     }
-}
 </script>
