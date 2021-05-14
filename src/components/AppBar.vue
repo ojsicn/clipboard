@@ -1,6 +1,6 @@
 <template>
-        <div class="navbar navbar-primary bg-primary fixed-top navbar-expand-lg">
-                <a class="toolbarText navbar-brand" href="#">게시판</a>
+        <div class="text-center p-3 bg-primary fixed-top">
+                <h1 class="text-white font-weight-bold">게시판</h1>
         </div>
 </template>
 

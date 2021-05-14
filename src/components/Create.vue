@@ -21,9 +21,7 @@
             <textarea type="text" class="form-control"
                 placeholder="내용" aria-label="Username" aria-describedby="basic-addon1" v-model.trim="formData.content"></textarea>
         </div>
-        <button type="button" class="btn btn-block btn-primary" @click="onClickAddOrUpdate()">
-            등록
-        </button>
+        <button type="button" class="btn btn-block btn-primary" @click="onClickAddOrUpdate()">등록</button>
     </div>
 </template>
 
@@ -60,7 +58,11 @@
                     boardList.push(this.formData)
                     localStorage.setItem('board-list', JSON.stringify(boardList))
                 } else {
-                    boardList.splice(this.$route.params.contentId, 1, this.formData)
+                    for(let i = 0; i < boardList.length; i++) {
+                        if(boardList[i].id == this.$route.params.contentId) {
+                            boardList.splice(i, 1, this.formData)
+                        }
+                    }
                     localStorage.clear()
                     localStorage.setItem('board-list', JSON.stringify(boardList))
                 }

@@ -1,29 +1,18 @@
 <template>
     <div>
         <app-bar/>
-        <div class="">
+        <div class="cont container border-primary">
             <br><br><br><br>
-            <table class="table">
-            <thead class="col">
-                <tr class="col">
-                    <th scope="row-2">번호</th>
-                    <th scope="row-2">글쓴이</th>
-                    <th scope="row-2">제목</th>
-                    <th scope="row-6">내용</th>
-                </tr>
-            </thead>
-            <tbody class="col">
-                <tr v-for="(value, index) of boardList" :key="index" @click="detail(index)">
-                    <th scope="row-2">{{index+1}}</th>
-                    <td class="row-2">{{value.writer}}</td>
-                    <td class="row-2">{{value.title}}</td>
-                    <td class="row-6">{{value.content}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-primary ml-2" type="submit" @click="write">글쓰기</button>
+            <div class="col-12 card" v-for="(value, index) of boardList" :key="index" @click="detail(value)">
+                <div class="ml-1 font-weight-bold "><span class="font-weight-bold">No.</span> {{index + 1}}</div>
+                <div class="ml-1 text-truncate "><span class="font-weight-bold">Writer. </span> {{value.writer}}</div>
+                <div class="ml-1 text-truncate "><span class="font-weight-bold">Title. </span> {{value.title}}</div>
+            </div>
+            <br>
         </div>
-        
+        <div>
+            <button type="button" class="btn btn-block btn-primary" @click="write">글쓰기</button>
+        </div>
     </div>
 </template>
 
@@ -54,11 +43,11 @@
                     path: 'create'
                 })
             },
-            detail(index) {
+            detail(data) {
                 this.$router.push({
                     name: 'Detail',
                     params: {
-                        contentId: index
+                        contentId: data.id
                     }
                 })
             }
@@ -66,3 +55,12 @@
         
     }
 </script>
+
+
+<style scoped>
+    .cont {
+        width: 100%;
+        height: 25rem;
+        overflow: scroll;
+    }
+</style>
